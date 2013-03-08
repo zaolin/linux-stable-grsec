@@ -1614,9 +1614,6 @@ static int __init early_amd_iommu_init(void)
 	if (amd_iommu_pd_alloc_bitmap == NULL)
 		goto out;
 
-	/* init the device table */
-	init_device_table();
-
 	/*
 	 * let all alias entries point to itself
 	 */
@@ -1691,6 +1688,7 @@ static bool detect_ivrs(void)
 
 static int amd_iommu_init_dma(void)
 {
+	struct amd_iommu *iommu;
 	int ret;
 
 	if (iommu_pass_through)
@@ -1701,7 +1699,7 @@ static int amd_iommu_init_dma(void)
 	if (ret)
 		return ret;
 
-	init_device_table_dma();
+	init_device_table();
 
 	for_each_iommu(iommu)
 		iommu_flush_all_caches(iommu);
