@@ -1701,11 +1701,6 @@ static int amd_iommu_init_dma(void)
 	if (ret)
 		return ret;
 
-	init_device_table_dma();
-
-	for_each_iommu(iommu)
-		iommu_flush_all_caches(iommu);
-
 	amd_iommu_init_api();
 
 	amd_iommu_init_notifier();
